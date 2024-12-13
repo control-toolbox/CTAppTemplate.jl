@@ -1,6 +1,10 @@
 # CTApp.jl
 
-This repository is a template to create an application or a package for the [control-toolbox ecosystem](https://github.com/control-toolbox). The instructions to set up a new application / package are given in discussion https://github.com/control-toolbox/CTApp.jl/discussions/9.
+This repository is a template to create an application or a package for the [control-toolbox ecosystem](https://github.com/control-toolbox). 
+
+The instructions to set up a new application / package are given in discussion https://github.com/control-toolbox/CTApp.jl/discussions/9.
+
+**[Click here to follow instructions to use this template!](https://github.com/control-toolbox/CTApp.jl/discussions/9)** ⬅️
 
 ----
 
