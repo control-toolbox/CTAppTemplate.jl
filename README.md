@@ -4,7 +4,7 @@ This repository is a template to create an application or a package for the [con
 
 The instructions to set up a new application / package are given in discussion https://github.com/control-toolbox/CTAppTemplate.jl/discussions/9.
 
-[![**Click here to follow instructions to use this template!** ⬅️](https://img.shields.io/badge/Click_here_to_follow_instructions_to_use_this_template!-darkgreen)](https://github.com/control-toolbox/CTAppTemplate.jl/discussions/9)
+[![**Click here to follow instructions to use this template!** ⬅️](https://img.shields.io/badge/Click_here_to_follow_instructions_to_use_this_template!-darkgreen)](https://github.com/orgs/control-toolbox/discussions/65)
 
 ----
 
@@ -55,4 +55,4 @@ You can find first good issues (if any 🙂) [here][first-good-issue-url]. You m
 If you want to ask a question, feel free to start a discussion [here](https://github.com/orgs/control-toolbox/discussions). This forum is for general discussion about this repository and the [control-toolbox organization](https://github.com/control-toolbox).
 
 >[!NOTE]
-> If you want to add an application or a package to the control-toolbox ecosystem, please follow this [set up tutorial](https://github.com/control-toolbox/CTAppTemplate.jl/discussions/9).
+> If you want to add an application or a package to the control-toolbox ecosystem, please follow this [set up tutorial](https://github.com/orgs/control-toolbox/discussions/65).
