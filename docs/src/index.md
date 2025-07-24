@@ -1,6 +1,6 @@
-# CTApp
+# CTAppTemplate
 
-Documentation for [CTApp](https://github.com/control-toolbox/CTApp.jl).
+Documentation for [CTAppTemplate](https://github.com/control-toolbox/CTAppTemplate.jl).
 
 ## Reproducibility
 
