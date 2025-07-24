@@ -1,4 +1,4 @@
-module CTApp
+module CTAppTemplate
 
 greet() = print("Hello World!")
 

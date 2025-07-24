@@ -4,12 +4,12 @@ mkpath("./docs/src/assets")
 cp("./docs/Manifest.toml", "./docs/src/assets/Manifest.toml", force = true)
 cp("./docs/Project.toml", "./docs/src/assets/Project.toml", force = true)
 
-repo_url = "github.com/control-toolbox/CTApp.jl"
+repo_url = "github.com/control-toolbox/CTAppTemplate.jl"
 
 makedocs(;
     remotes=nothing,
     warnonly=:cross_references,
-    sitename="CTApp",
+    sitename="CTAppTemplate",
     format=Documenter.HTML(;
         repolink="https://" * repo_url,
         prettyurls=false,
