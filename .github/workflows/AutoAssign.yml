@@ -1,4 +1,3 @@
-# https://github.com/marketplace/actions/auto-assign-issue
 name: Auto Assign
 on:
   issues:
