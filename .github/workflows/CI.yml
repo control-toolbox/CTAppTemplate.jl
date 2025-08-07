@@ -1,4 +1,3 @@
-# [.github/workflows/CI.yml]
 name: CI
 on:
   push:
