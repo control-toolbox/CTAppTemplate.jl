@@ -19,6 +19,4 @@ CTAppTemplate.jl is part of the [control-toolbox ecosystem](https://github.com/c
 
 <!-- INCLUDE_ABOUT -->
 
-<!-- INCLUDE_INSTALL -->
-
 <!-- INCLUDE_CONTRIBUTING -->
