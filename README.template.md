@@ -8,6 +8,11 @@ The instructions to set up a new application / package are given in discussion h
 
 ----
 
+<!-- 
+For instructions on how to customize this README.template.md and use the centralized workflow,
+please see the user guide: https://github.com/orgs/control-toolbox/discussions/67
+-->
+
 CTAppTemplate.jl is part of the [control-toolbox ecosystem](https://github.com/control-toolbox).
 
 <!-- INCLUDE_BADGES: Documentation, CI, Coverage, CodeStyle, License -->
