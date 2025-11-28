@@ -2,5 +2,8 @@
 CTAppTemplate = "eb604665-d64b-4d02-aa6d-8b42324a08dc"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 
+[sources]
+CTAppTemplate = {path = "/home/runner/work/CTAppTemplate.jl/CTAppTemplate.jl"}
+
 [compat]
 Documenter = "1"
