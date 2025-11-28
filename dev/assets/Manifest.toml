@@ -29,7 +29,7 @@ version = "1.11.0"
 [[deps.CTAppTemplate]]
 path = "/home/runner/work/CTAppTemplate.jl/CTAppTemplate.jl"
 uuid = "eb604665-d64b-4d02-aa6d-8b42324a08dc"
-version = "0.2.0"
+version = "0.1.0"
 
 [[deps.CodecZlib]]
 deps = ["TranscodingStreams", "Zlib_jll"]
