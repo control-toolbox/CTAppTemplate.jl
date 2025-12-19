@@ -10,6 +10,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Check if running on the template repository
+        if: github.repository == 'control-toolbox/CTAppTemplate.jl'
+        run: |
+          echo "::error::This workflow is not intended to be run on the template repository itself."
+          exit 1
+
       - name: Get repository metadata
         id: meta
         run: |
