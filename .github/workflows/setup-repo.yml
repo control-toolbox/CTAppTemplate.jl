@@ -137,8 +137,18 @@ jobs:
           
           echo "  Updated UUID and authors in Project.toml"
           
-          # 6. Update assignees
-          echo "Step 6: Updating assignees..."
+          # 6. Remove template instructions from README files
+          echo "Step 6: Removing template instructions..."
+          for readme_file in README.md README.template.md; do
+            if [ -f "$readme_file" ]; then
+              # Remove lines between REMOVE_TEMPLATE_INSTRUCTIONS_START and REMOVE_TEMPLATE_INSTRUCTIONS_END
+              sed -i '/<!-- REMOVE_TEMPLATE_INSTRUCTIONS_START -->/,/<!-- REMOVE_TEMPLATE_INSTRUCTIONS_END -->/d' "$readme_file"
+              echo "  Cleaned: $readme_file"
+            fi
+          done
+          
+          # 7. Update assignees
+          echo "Step 7: Updating assignees..."
           if [ -d ".github/ISSUE_TEMPLATE" ]; then
             find .github/ISSUE_TEMPLATE -type f -name "*.md" -exec sed -i "s|assignees: ocots|assignees: $ACTOR|g" {} +
             echo "  Updated assignees in issue templates"
