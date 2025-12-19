@@ -22,7 +22,7 @@ jobs:
       assignee: ${{ steps.config.outputs.assignee }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Compute repository metadata
         id: meta
