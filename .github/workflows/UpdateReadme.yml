@@ -5,14 +5,54 @@ on:
     - cron: '0 6 * * 1'   # every Monday at 06:00 UTC
   workflow_dispatch:       # manual trigger
 
+env:
+  DOC_URL_OVERRIDE: ""   # optional, e.g. https://my-domain.example/MyApp.jl
+  CITATION_BADGE: ""     # optional, e.g. "[![DOI](https://zenodo.org/badge/....svg)](https://zenodo.org/doi/....)"
+  ASSIGNEE: ""           # optional, GitHub username(s), comma-separated
+
 jobs:
   check-template:
     runs-on: ubuntu-latest
     outputs:
       has_template: ${{ steps.check.outputs.has_template }}
+      repo_name: ${{ steps.meta.outputs.repo_name }}
+      package_name: ${{ steps.meta.outputs.package_name }}
+      doc_url: ${{ steps.meta.outputs.doc_url }}
+      citation_badge: ${{ steps.config.outputs.citation_badge }}
+      assignee: ${{ steps.config.outputs.assignee }}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v5
+
+      - name: Compute repository metadata
+        id: meta
+        shell: bash
+        run: |
+          repo_name="${GITHUB_REPOSITORY}"              # owner/repo
+          repo_owner="${GITHUB_REPOSITORY%%/*}"         # owner
+          repo_basename="${GITHUB_REPOSITORY#*/}"       # repo
+          package_name="${repo_basename%.jl}"           # strip .jl suffix if present
+
+          if [[ -n "${DOC_URL_OVERRIDE}" ]]; then
+            doc_url="${DOC_URL_OVERRIDE}"
+          else
+            if [[ "${repo_owner}" == "control-toolbox" ]]; then
+              doc_url="https://control-toolbox.org/${repo_basename}"
+            else
+              doc_url="https://${repo_owner}.github.io/${repo_basename}"
+            fi
+          fi
+
+          echo "repo_name=${repo_name}" >> "$GITHUB_OUTPUT"
+          echo "package_name=${package_name}" >> "$GITHUB_OUTPUT"
+          echo "doc_url=${doc_url}" >> "$GITHUB_OUTPUT"
+
+      - name: Expose config variables as outputs
+        id: config
+        shell: bash
+        run: |
+          echo "citation_badge=${CITATION_BADGE}" >> "$GITHUB_OUTPUT"
+          echo "assignee=${ASSIGNEE}" >> "$GITHUB_OUTPUT"
 
       - name: Check for README.template.md
         id: check
@@ -32,9 +72,9 @@ jobs:
     with:
       template_file: README.template.md
       output_file: README.md
-      package_name: CTAppTemplate                            # package for INSTALL.md
-      repo_name: control-toolbox/CTAppTemplate.jl            # repository for CONTRIBUTING.md links
-      doc_url: https://control-toolbox.org/CTAppTemplate.jl
-      citation_badge: "[![DOI](https://zenodo.org/badge/541187171.svg)](https://zenodo.org/doi/10.5281/zenodo.16753152)" # example, can be empty
-      assignee: "ocots"
+      package_name: ${{ needs.check-template.outputs.package_name }}  # package for INSTALL.md
+      repo_name: ${{ needs.check-template.outputs.repo_name }}        # repository for CONTRIBUTING.md links
+      doc_url: ${{ needs.check-template.outputs.doc_url }}
+      citation_badge: ${{ needs.check-template.outputs.citation_badge }}
+      assignee: ${{ needs.check-template.outputs.assignee }}
     secrets: inherit
