@@ -1,27 +1,33 @@
-# Ref: https://securitylab.github.com/research/github-actions-preventing-pwn-requests
 name: Breakage
+run-name: "Breakage${{ inputs.pr && format(' #{0}', inputs.pr) || '' }}"
 
-# read-only repo token
-# no access to secrets
+# On a pull request, a label starts its own run through Labels.yml
+# (CTActions docs/workflows/label-dispatch.md).
+
+# The packages that depend on this one, derived from the Project.toml files of the
+# organization, tested against it; one report per run. On push to main and by hand, the
+# run is the baseline the next release PR compares with (REL1); see
+# CTActions docs/workflows/breakage-suite.md.
+
 on:
-  pull_request:
-    types: [labeled, synchronize, opened, reopened]
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: 'Pull request number, set by label-dispatch.yml; empty by hand: the baseline run'
+        required: false
+        default: ''
+      target:
+        description: 'packages or applications'
+        required: false
+        default: ''
 
 jobs:
   call:
-    if: contains(github.event.pull_request.labels.*.name, 'run breakage')
-    strategy:
-      fail-fast: false
-      matrix:
-        pkgname: [OptimalControl]
-        pkgversion: [latest, stable]
-        include:
-          - pkgpath: control-toolbox
-    uses: control-toolbox/CTActions/.github/workflows/breakage.yml@main
+    if: inputs.pr == '' || inputs.target == 'packages'
+    uses: control-toolbox/CTActions/.github/workflows/breakage-suite.yml@main
     with:
-      pkgname: ${{ matrix.pkgname }}
-      pkgpath: ${{ matrix.pkgpath }}
-      pkgversion: ${{ matrix.pkgversion }}
       use_ct_registry: true
     secrets:
       SSH_KEY: ${{ secrets.SSH_KEY }}

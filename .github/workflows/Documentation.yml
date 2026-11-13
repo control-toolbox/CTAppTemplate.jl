@@ -1,12 +1,31 @@
 name: Documentation
+run-name: "Documentation${{ inputs.pr && format(' #{0}', inputs.pr) || '' }}"
+
+# On a pull request, a label starts its own run through Labels.yml
+# (CTActions docs/workflows/label-dispatch.md).
 
 on:
   push:
     branches:
       - main
-    tags: '*'
-  pull_request:
-  
+    tags:
+      - 'v[0-9]+\.[0-9]+\.[0-9]+'   # v0.26.0 yes, v0.26.0-beta no
+  # run on a tag by ReleaseTag.yml: a tag it creates triggers no push event
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: 'Pull request number, set by label-dispatch.yml'
+        required: false
+        default: ''
+      preview:
+        description: 'Deploy the preview of the pull request (label documentation push preview)'
+        required: false
+        default: 'false'
+
 jobs:
   call:
     uses: control-toolbox/CTActions/.github/workflows/documentation.yml@main
+    with:
+      use_ct_registry: true
+    secrets:
+      SSH_KEY: ${{ secrets.SSH_KEY }}
